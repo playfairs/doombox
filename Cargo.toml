@@ -1,0 +1,30 @@
+[package]
+name = "doombox"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+x86_64 = { version = "0.14", features = ["abi_x86_interrupt", "step_trait", "const_fn"] }
+uart_16550 = "0.2"
+spin = "0.9"
+volatile = "0.2"
+bit_field = "0.10"
+pc-keyboard = "0.7"
+pic8259 = "0.10"
+lazy_static = { version = "1.4", features = ["spin_no_std"] }
+heapless = "0.8"
+bootloader = "0.9"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "z"
+overflow-checks = false
+
+[[bin]]
+name = "doombox"
+path = "src/main.rs"
