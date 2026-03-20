@@ -1,14 +1,18 @@
 .PHONY: all clean build iso run setup setup-rust setup-nix install-deps
 
-# Full: Works on all Linux Distros. If NixOS, uses the Nix Flake instead.
+# Full Setup
+# For Nix specifically, if the Distribution is either NixOS, or the ~/nix or ~/.nix Directory is found, it uses the setup-nix command.
 setup:
 	@echo "DOOMBOX Setup"
 	@echo "================"
-	@if command -v nix &> /dev/null; then \
-		echo "Nix found - using Nix setup"; \
+	@if [ -d /nix ] || [ -d /nix/store ]; then \
+		echo "NixOS detected; Using Nix setup"; \
+		$(MAKE) setup-nix; \
+	elif command -v nix &> /dev/null; then \
+		echo "nix-cli foundl Using Nix setup"; \
 		$(MAKE) setup-nix; \
 	else \
-		echo "⚠️  Nix not found - installing dependencies manually"; \
+		echo "Nix is not present on this Machine. Installing dependencies manually"; \
 		$(MAKE) install-deps; \
 		$(MAKE) setup-rust; \
 	fi
