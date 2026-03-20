@@ -8,8 +8,8 @@ setup:
 	@if [ -d /nix ] || [ -d /nix/store ]; then \
 		echo "NixOS detected; Using Nix setup"; \
 		$(MAKE) setup-nix; \
-	elif command -v nix &> /dev/null; then \
-		echo "nix-cli foundl Using Nix setup"; \
+	elif command -v nix &> /dev/null && nix --version &> /dev/null; then \
+		echo "nix-cli found; Using Nix setup"; \
 		$(MAKE) setup-nix; \
 	else \
 		echo "Nix is not present on this Machine. Installing dependencies manually"; \
