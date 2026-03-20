@@ -22,7 +22,6 @@ setup-rust:
 	@if ! command -v rustup &> /dev/null; then \
 		echo "Installing Rust..."; \
 		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y; \
-		source ~/.cargo/env; \
 	fi
 	@echo "Installing nightly toolchain..."
 	@rustup toolchain install nightly
@@ -62,7 +61,7 @@ install-deps:
 	@if [ -f /etc/debian_version ] || [ -f /etc/ubuntu-release ]; then \
 		echo "Detected Debian/Ubuntu-based system"; \
 		sudo apt-get update; \
-		sudo apt-get install -y build-essential grub-common grub-pc-bin grub2-common xorriso qemu-system-x86 pkg-config curl git; \
+		sudo apt-get install -y build-essential grub-common grub2-common xorriso qemu-system-x86 pkg-config curl git; \
 	elif [ -f /etc/fedora-release ] || [ -f /etc/redhat-release ]; then \
 		echo "Detected Red Hat/Fedora-based system"; \
 		sudo dnf install -y gcc grub2 xorriso qemu-system-x86 pkgconfig curl git make; \
@@ -71,7 +70,7 @@ install-deps:
 		sudo pacman -S --noconfirm grub xorriso qemu pkgconf curl git base-devel; \
 	elif [ -f /etc/os-release ]; then \
 		. /etc/os-release; \
-		if [ "$ID" = "opensuse-leap" ] || [ "$ID" = "opensuse-tumbleweed" ]; then \
+		if [ "$$ID" = "opensuse-leap" ] || [ "$ID" = "opensuse-tumbleweed" ]; then \
 			echo "Detected openSUSE-based system"; \
 			sudo zypper install -y grub2 xorriso qemu-x86 pkg-config curl git make; \
 		else \
