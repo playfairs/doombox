@@ -169,7 +169,7 @@ help:
 	@echo ""
 	@echo "Development:"
 	@echo "  make fmt             - Format code"
-	@echo "  make clippy           - Run linter"
+	@echo "  make clippy          - Run linter"
 	@echo "  make clean           - Clean build artifacts"
 	@echo "  make test-setup      - Verify installation"
 	@echo "  make help            - Show this help"
