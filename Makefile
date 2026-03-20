@@ -5,16 +5,15 @@
 setup:
 	@echo "DOOMBOX Setup"
 	@echo "================"
-	@if [ -d /nix ] || [ -d /nix/store ]; then \
-		echo "NixOS detected; Using Nix setup"; \
-		$(MAKE) setup-nix; \
-	elif command -v nix &> /dev/null && nix --version &> /dev/null; then \
-		echo "nix-cli found; Using Nix setup"; \
-		$(MAKE) setup-nix; \
-	else \
-		echo "Nix is not present on this Machine. Installing dependencies manually"; \
+	@echo "Do you want to setup with Nix? (y/N)"
+	@read -r answer; \
+	if [ "$$answer" != "y" ] && [ "$$answer" != "Y" ]; then \
+		echo "Nix setup declined. Installing dependencies manually"; \
 		$(MAKE) install-deps; \
 		$(MAKE) setup-rust; \
+	else \
+		echo "Setting up with Nix..."; \
+		$(MAKE) setup-nix; \
 	fi
 
 # Rust Setup for Bare Metal
