@@ -148,8 +148,8 @@ test-setup:
 	fi
 
 help:
-	@echo "DOOMBOX Makefile Commands"
-	@echo "=========================="
+	@echo "DOOMBOX Makefile"
+	@echo ""
 	@echo ""
 	@echo "Setup Commands:"
 	@echo "  make setup           - Full setup (auto-detects system)"
