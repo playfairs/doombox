@@ -25,7 +25,14 @@ A bare-metal Rust project that boots directly into DOOM without any operating sy
 ```
 
 >[!IMPORTANT]
-> This Project is not complete and is not stable yet, so it is highly unrecommended to run this on bare-metal, if you want to test it on a Virtual Machine, or use QEMU, do that instead, and if you want to contribute, fork the Repository, and make a [**Pull Request**](https://github.com/playfairs/doombox/compare).
+> This Project is not complete and is not stable yet, so it is highly unrecommended to run this on bare-metal,
+> if you want to test it on a Virtual Machine, or use QEMU, do that instead, and if you want to contribute,
+> fork the Repository, and make a [**Pull Request**](https://github.com/playfairs/doombox/compare).
+> ---
+> Also, since I have never made something like this, it may take a while to create since I don't
+> have the absolute patience needed to work on this actively. This will be updated when the project
+> is in a stable state.
+
 
 ## Overview
 
