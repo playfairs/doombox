@@ -28,6 +28,11 @@ setup-rust:
 	@rustup default nightly
 	@echo "Adding bare-metal target..."
 	@rustup target add x86_64-unknown-none
+	@if [ "$$(uname -m)" = "aarch64" ]; then \
+		echo "ARM system detected - installing x86_64 cross-compilation tools"; \
+		rustup target add x86_64-unknown-unknown-gnu; \
+		rustup target add x86_64-unknown-unknown-musl; \
+	fi
 	@echo "Installing rust-src component..."
 	@rustup component add rust-src --toolchain nightly
 	@rustup component add rustfmt clippy
@@ -87,9 +92,15 @@ install-deps:
 
 # Kernel Build
 build:
-	@echo "🔨 Building DOOMBOX kernel..."
-	cargo build --release
-	@echo "Build complete"
+	@echo "Building DOOMBOX kernel..."
+	@if [ "$$(uname -m)" = "aarch64" ]; then \
+		echo "ARM system detected - using cross-compilation"; \
+		cargo build --release --target x86_64-unknown-none; \
+	else \
+		echo "x86_64 system detected - native compilation"; \
+		cargo build --release --target x86_64-unknown-none; \
+	fi
+	@echo "Build complete!"
 
 kernel: build
 	@mkdir -p build
