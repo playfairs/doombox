@@ -66,26 +66,26 @@ install-deps:
 	@if [ -f /etc/debian_version ] || [ -f /etc/ubuntu-release ]; then \
 		echo "Detected Debian/Ubuntu-based system"; \
 		sudo apt-get update; \
-		sudo apt-get install -y build-essential grub-common grub2-common xorriso qemu-system-x86 pkg-config curl git; \
+		sudo apt-get install -y build-essential grub-common grub2-common xorriso qemu-system-x86 pkg-config curl git mtools; \
 	elif [ -f /etc/fedora-release ] || [ -f /etc/redhat-release ]; then \
 		echo "Detected Red Hat/Fedora-based system"; \
-		sudo dnf install -y gcc grub2 xorriso qemu-system-x86 pkgconfig curl git make; \
+		sudo dnf install -y gcc grub2 xorriso qemu-system-x86 pkgconfig curl git make mtools; \
 	elif [ -f /etc/arch-release ]; then \
 		echo "Detected Arch-based system"; \
-		sudo pacman -S --noconfirm grub xorriso qemu pkgconf curl git base-devel; \
+		sudo pacman -S --noconfirm grub xorriso qemu pkgconf curl git base-devel mtools; \
 	elif [ -f /etc/os-release ]; then \
 		. /etc/os-release; \
 		if [ "$$ID" = "opensuse-leap" ] || [ "$ID" = "opensuse-tumbleweed" ]; then \
 			echo "Detected openSUSE-based system"; \
-			sudo zypper install -y grub2 xorriso qemu-x86 pkg-config curl git make; \
+			sudo zypper install -y grub2 xorriso qemu-x86 pkg-config curl git make mtools; \
 		else \
 			echo "Unsupported distribution: $$ID"; \
-			echo "Please manually install: grub2, xorriso, qemu-system-x86, pkg-config, curl, git"; \
+			echo "Please manually install: grub2, xorriso, qemu-system-x86, pkg-config, curl, git, mtools"; \
 			exit 1; \
 		fi; \
 	else \
 		echo "Cannot detect distribution"; \
-		echo "Please manually install: grub2, xorriso, qemu-system-x86, pkg-config, curl, git"; \
+		echo "Please manually install: grub2, xorriso, qemu-system-x86, pkg-config, curl, git, mtools"; \
 		exit 1; \
 	fi
 	@echo "System dependencies installed!"
